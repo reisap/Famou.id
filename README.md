@@ -1,4 +1,4 @@
-# flutix
+# Famou.id
 
 A new Flutter application.
 
