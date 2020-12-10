@@ -105,7 +105,21 @@ class MoviePage extends StatelessWidget {
                   .toList(),
             ));
           } else {
-            return SpinKitWave(color: mainColor);
+            return SizedBox(
+              height: 180,
+              width: MediaQuery.of(context).size.width,
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[300],
+                highlightColor: Colors.grey,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+            );
           }
         })
       ],
@@ -145,7 +159,26 @@ class MoviePage extends StatelessWidget {
                 ),
               );
             } else {
-              return SpinKitWave(color: mainColor);
+              return SizedBox(
+                height: 170,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey[300],
+                  highlightColor: Colors.grey,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) => Container(
+                      height: 170,
+                      width: 120,
+                      margin: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              );
             }
           }),
         ),

@@ -22,6 +22,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter_ticket_widget/flutter_ticket_widget.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:path/path.dart';
+import 'package:shimmer/shimmer.dart';
 
 part 'account_confirmation_page.dart';
 

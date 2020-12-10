@@ -60,6 +60,14 @@ class MovieCard extends StatelessWidget {
               height: 170,
               width: 120,
               decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(3, 1), // changes position of shadow
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: NetworkImage(

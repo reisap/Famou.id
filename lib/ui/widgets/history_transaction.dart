@@ -24,11 +24,11 @@ class HistoryList extends StatelessWidget {
                   margin: EdgeInsets.only(right: 16),
                   child: (index.picture != null)
                       ? ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                        "$imageBaseURL/w500/${index.picture}",
-                        fit: BoxFit.cover),
-                  )
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                              "$imageBaseURL/w500/${index.picture}",
+                              fit: BoxFit.cover),
+                        )
                       : Image.asset("assets/bg_topup.png"),
                 ),
                 Expanded(
@@ -47,7 +47,7 @@ class HistoryList extends StatelessWidget {
                       SizedBox(height: 5),
                       Text(
                         NumberFormat.currency(
-                            locale: "id_ID", decimalDigits: 0, symbol: "Rp")
+                                locale: "id_ID", decimalDigits: 0, symbol: "Rp")
                             .format(index.amount)
                             .replaceAll("-", ""),
                         style: whiteNumberFont.copyWith(

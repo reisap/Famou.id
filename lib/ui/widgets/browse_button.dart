@@ -16,6 +16,14 @@ class BrowseButton extends StatelessWidget {
             height: 50,
             width: 50,
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(2, 2), // changes position of shadow
+                ),
+              ],
               color: Color(0xFFEBEFF6),
               borderRadius: BorderRadius.circular(6),
               image: DecorationImage(

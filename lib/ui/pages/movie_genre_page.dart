@@ -112,9 +112,57 @@ class MovieGenrePage extends StatelessWidget {
                                 }))
                             .toList());
                   } else {
-                    return Center(
-                      child: SpinKitDoubleBounce(
-                        color: mainColor,
+                    return Shimmer.fromColors(
+                      baseColor: Colors.grey[100],
+                      highlightColor: Colors.grey,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        itemBuilder: (context, index) => Container(
+                          height: 150,
+                          margin: EdgeInsets.only(top: 10),
+                          child: Card(
+                            elevation: 5,
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(4),
+                                      bottomLeft: Radius.circular(4),
+                                    ),
+                                    child: Container(
+                                      height: 150,
+                                      width: 100,
+                                    )),
+                                Expanded(
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "                 ",
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          "                 ",
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          "                 ",
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   }

@@ -18,7 +18,9 @@ class WalletPage extends StatelessWidget {
           width: 46,
           child: FloatingActionButton(
             onPressed: () {
-              context.bloc<PageBloc>().add(GoToTopUpPage(GoToWalletPage(pageEvent)));
+              context
+                  .bloc<PageBloc>()
+                  .add(GoToTopUpPage(GoToWalletPage(pageEvent)));
             },
             backgroundColor: accentColor2,
             child: FaIcon(FontAwesomeIcons.cartArrowDown,
@@ -63,6 +65,7 @@ class WalletPage extends StatelessWidget {
                           List<AppTransaction> transaction = snapshot.data;
                           transaction
                               .sort((tr1, tr2) => tr2.time.compareTo(tr1.time));
+                          transaction.take(30);
                           return HistoryList(transaction: transaction);
                         } else {
                           return SpinKitDualRing(
