@@ -84,16 +84,68 @@ class SettingsPage extends StatelessWidget {
                             .add(GoToWalletPage(GoToSettingsPage()));
                       }),
                       SizedBox(height: 10),
-                      SettingsMenu(FontAwesomeIcons.laptopCode,
-                          "About Developer", () {}),
+                      SettingsMenu(
+                          FontAwesomeIcons.laptopCode, "About Developer", () {
+                        _showDialog(
+                          context,
+                          title: "About Developer",
+                          content: _aboutDevsContent(),
+                        );
+                      }),
+                      SizedBox(height: 10),
+                      SettingsMenu(FontAwesomeIcons.infoCircle, "About Apps",
+                          () {
+                        _showDialog(
+                          context,
+                          title: "About Famou.ID",
+                          content: _aboutAppsContent(),
+                        );
+                      }),
                       SizedBox(height: 10),
                       SettingsMenu(
-                          FontAwesomeIcons.infoCircle, "About Apps", () {}),
-                      SizedBox(height: 10),
-                      SettingsMenu(FontAwesomeIcons.signOutAlt, "Sign Out", () {
-                        context.bloc<UserBloc>().add(SignOut());
-                        AuthService.signOut();
-                      }),
+                        FontAwesomeIcons.signOutAlt,
+                        "Sign Out",
+                        () {
+                          Alert(
+                              context: context,
+                              title: "Sign Out?",
+                              desc:
+                                  "Do you want to sign out from this account?",
+                              type: AlertType.error,
+                              style: AlertStyle(
+                                titleStyle: blackTextFont.copyWith(
+                                    fontWeight: FontWeight.bold),
+                                descStyle: blackTextFont.copyWith(fontSize: 14),
+                                animationType: AnimationType.fromBottom,
+                              ),
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "Cancel",
+                                    style: blackTextFont.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  color: Colors.grey[300],
+                                ),
+                                DialogButton(
+                                  child: Text(
+                                    "Sign Out",
+                                    style: blackTextFont.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    context.bloc<UserBloc>().add(SignOut());
+                                    AuthService.signOut();
+                                  },
+                                )
+                              ]).show();
+                        },
+                      ),
                       SizedBox(height: 20),
                       Text(
                         "Famou.ID",
@@ -120,6 +172,79 @@ class SettingsPage extends StatelessWidget {
           }
         }),
       ),
+    );
+  }
+
+  void _showDialog(BuildContext context,
+      {@required String title, @required Widget content}) {
+    Alert(
+      context: context,
+      title: title,
+      content: content,
+      type: AlertType.info,
+      style: AlertStyle(
+        animationType: AnimationType.fromBottom,
+        titleStyle: blackTextFont.copyWith(fontWeight: FontWeight.bold),
+      ),
+    ).show();
+  }
+
+  Widget _aboutAppsContent() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Text(
+            "Famou.ID is a cinema ticket booking simulation application, created using the Flutter framework with the Dart programming language.\n\nYou can search for now playing movies, upcoming movies, movies by genre and region that you like and you can simulate ticket bookings.\n",
+            textAlign: TextAlign.justify,
+            style: blackTextFont.copyWith(fontSize: 12),
+          ),
+          Text(
+            "Special Thanks for the icons. Icons made by:\n\n-> Pixel Perfect www.flaticon.com\n-> Flat Icons www.flaticon.com\n-> Freepik www.flaticon.com",
+            style: blackTextFont.copyWith(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _aboutDevsContent() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Text(
+            "Hello, my name is Ian Ahmad Fachriza (22 years old) from Watampone, South Sulawesi, Indonesia.\n\nI work as a programmer at a private bank in Indonesia. I am experienced in the programming world, especially in mobile application development.\n\nI have experience in the Dart programming language for Flutter, Kotlin and Java. Nice to meet you, I hope you like this application :).\n",
+            textAlign: TextAlign.justify,
+            style: blackTextFont.copyWith(fontSize: 12),
+          ),
+          _buildContactRow(
+              FontAwesomeIcons.mailBulk, "me.business25@gmail.com"),
+          SizedBox(height: 8),
+          _buildContactRow(FontAwesomeIcons.linkedin,
+              "https://www.linkedin.com/in/ianahmadfachriza/"),
+          SizedBox(height: 8),
+          _buildContactRow(
+              FontAwesomeIcons.github, "https://github.com/ianahmfac"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContactRow(IconData icon, String text) {
+    return Row(
+      children: [
+        FaIcon(
+          icon,
+          size: 14,
+          color: Colors.blue,
+        ),
+        SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            text,
+            style: blackTextFont.copyWith(fontSize: 12),
+          ),
+        ),
+      ],
     );
   }
 }

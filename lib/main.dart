@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) => GestureDetector(
-            onTap: (){
+            onTap: () {
               FocusManager.instance.primaryFocus.unfocus();
             },
             child: MaterialApp(

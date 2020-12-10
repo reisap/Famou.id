@@ -24,7 +24,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF6F7F9),
       body: Stack(
         children: [
           Container(
@@ -54,19 +53,26 @@ class _MainPageState extends State<MainPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: accentColor2,
+        elevation: 0,
         onPressed: () {
           context.bloc<PageBloc>().add(GoToTopUpPage(GoToMainPage()));
         },
         child: Center(
-            child: FaIcon(FontAwesomeIcons.cartArrowDown,
-                color: accentColor1, size: 20)),
+          child: FaIcon(
+            FontAwesomeIcons.cartArrowDown,
+            color: accentColor1,
+            size: 20,
+          ),
+        ),
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        elevation: 4,
+        notchMargin: 6,
+        color: Colors.white,
+        clipBehavior: Clip.antiAlias,
         child: BottomNavigationBar(
           backgroundColor: Colors.white,
-          elevation: 10,
           items: [
             BottomNavigationBarItem(
                 icon: FaIcon(FontAwesomeIcons.home), label: "Home"),
