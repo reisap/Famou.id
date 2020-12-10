@@ -90,57 +90,96 @@ class _ProfilePageState extends State<ProfilePage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            onPressed: (isUpdating) ? null : (){
-                              showDialog(context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text("Reset Your Password?", style: blackTextFont.copyWith(color: accentColor1, fontSize: 16, fontWeight: FontWeight.bold)),
-                                  content: Text("Would You like to Reset Your Password?", style: greyTextFont.copyWith(fontSize: 12)),
-                                  actions: [
-                                    FlatButton(child: Text("Cancel", style: blackTextFont.copyWith(color: mainColor, fontWeight: FontWeight.w300)), onPressed: (){Navigator.pop(context);}),
-                                    FlatButton(child: Text("Reset Password", style: blackTextFont.copyWith(color: mainColor, fontWeight: FontWeight.bold)), onPressed: () async{
-                                      await AuthService.resetPassword(widget.user.email);
-                                      Navigator.pop(context);
-                                      Flushbar(
-                                        backgroundColor: Color(0xFF3E9D9D),
-                                        flushbarPosition: FlushbarPosition.TOP,
-                                        message: "Your Reset Password's Link was Sent to Your Email",
-                                        duration: Duration(milliseconds: 4000),
-                                      )..show(context);
-                                    }),
-                                  ]
-                                )
-                              );
-                            },
+                            onPressed: (isUpdating)
+                                ? null
+                                : () {
+                                    Alert(
+                                      context: context,
+                                      title: "Reset Password?",
+                                      type: AlertType.warning,
+                                      desc:
+                                          "You will receive an email with password reset's LINK!",
+                                      buttons: [
+                                        DialogButton(
+                                          color: Colors.grey[300],
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("Cancel",
+                                              style: blackTextFont.copyWith(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        DialogButton(
+                                          color: Color(0xFFFF5C83),
+                                          onPressed: () async {
+                                            await AuthService.resetPassword(
+                                                widget.user.email);
+                                            Navigator.of(context).pop();
+                                            Flushbar(
+                                                backgroundColor:
+                                                    Color(0xFF3E9D9D),
+                                                flushbarPosition:
+                                                    FlushbarPosition.TOP,
+                                                message:
+                                                    "Your Reset Password's Link was Sent to Your Email",
+                                                duration: Duration(
+                                                    milliseconds: 4000))
+                                              ..show(context);
+                                          },
+                                          child: Text("Reset",
+                                              style: blackTextFont.copyWith(
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                      ],
+                                      style: AlertStyle(
+                                        titleStyle: blackTextFont.copyWith(
+                                            fontWeight: FontWeight.bold),
+                                        descStyle: blackTextFont.copyWith(
+                                            fontSize: 14),
+                                        animationType: AnimationType.fromBottom,
+                                      ),
+                                    ).show();
+                                  },
                             child: Text("Reset Password", style: whiteTextFont),
                           ),
                         ),
                       ),
-                      (isUpdating) ? SpinKitRing(
-                        color: mainColor,
-                      ) :
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          margin: EdgeInsets.all(8),
-                          child: RaisedButton(
-                            color: Color(0xFF3E9D9D),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
+                      (isUpdating)
+                          ? SpinKitRing(
+                              color: mainColor,
+                            )
+                          : Expanded(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.all(8),
+                                child: RaisedButton(
+                                  color: Color(0xFF3E9D9D),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  onPressed: isDataEdited
+                                      ? () async {
+                                          setState(() {
+                                            isUpdating = true;
+                                          });
+                                          if (profileImageFile != null) {
+                                            profilePath = await uploadImage(
+                                                profileImageFile);
+                                          }
+                                          context.bloc<UserBloc>().add(
+                                              UpdateUserData(
+                                                  name: name.text,
+                                                  profileImage: profilePath));
+                                          context
+                                              .bloc<PageBloc>()
+                                              .add(GoToSettingsPage());
+                                        }
+                                      : null,
+                                  child: Text("Update Profile",
+                                      style: whiteTextFont),
+                                ),
+                              ),
                             ),
-                            onPressed: isDataEdited ? () async {
-                              setState(() {
-                                isUpdating = true;
-                              });
-                              if(profileImageFile != null){
-                                profilePath = await uploadImage(profileImageFile);
-                              }
-                              context.bloc<UserBloc>().add(UpdateUserData(name: name.text, profileImage: profilePath));
-                              context.bloc<PageBloc>().add(GoToSettingsPage());
-                            } : null,
-                            child: Text("Update Profile", style: whiteTextFont),
-                          ),
-                        ),
-                      ),
                     ],
                   )
                 ],

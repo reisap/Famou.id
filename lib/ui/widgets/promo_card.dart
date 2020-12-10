@@ -10,27 +10,18 @@ class PromoCard extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text(
-                      "Information",
-                      style: blackTextFont.copyWith(color: accentColor1),
-                    ),
-                    content: Text(
-                      "Thank you for using this application. This feature will coming in future. So, don't missed it!",
-                      style: greyTextFont.copyWith(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    actions: [
-                      FlatButton(
-                          child: Text("OK"),
-                          textColor: mainColor,
-                          onPressed: () => Navigator.of(context).pop()),
-                    ],
-                  );
-                });
+            Alert(
+              context: context,
+              title: "Information",
+              desc:
+                  "Thank you for using this application. This feature will coming in future. So, don't missed it!",
+              type: AlertType.info,
+              style: AlertStyle(
+                descStyle: blackTextFont.copyWith(fontSize: 14),
+                titleStyle: blackTextFont.copyWith(fontWeight: FontWeight.bold),
+                animationType: AnimationType.fromBottom,
+              ),
+            ).show();
           },
           child: Container(
             height: 100,

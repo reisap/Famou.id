@@ -17,10 +17,7 @@ class _TopUpPageState extends State<TopUpPage> {
   @override
   Widget build(BuildContext context) {
     var cardWidth =
-        (MediaQuery
-            .of(context)
-            .size
-            .width - 2 * defaultMargin - 40) / 3;
+        (MediaQuery.of(context).size.width - 2 * defaultMargin - 40) / 3;
 
     context
         .bloc<ThemeBloc>()
@@ -49,7 +46,7 @@ class _TopUpPageState extends State<TopUpPage> {
           children: [
             Container(
               padding:
-              EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 20),
+                  EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 20),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,111 +109,107 @@ class _TopUpPageState extends State<TopUpPage> {
 
   Widget _buildButtonTopUp(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
-      builder: (_, userState) =>
-          Container(
-            margin: EdgeInsets.only(bottom: 30),
-            height: 45,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width - 2 * defaultMargin,
-            child: RaisedButton(
-              onPressed: (selectedAmount >= 10000)
-                  ? () {
-                showAlertDialog(context, userState);
-              }
-                  : null,
-              color: accentColor2,
-              disabledColor: accentColor3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Row(
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      text: "Top Up: ",
-                      style: whiteNumberFont.copyWith(
-                          fontWeight: FontWeight.w300,
-                          color: (selectedAmount >= 10000)
-                              ? accentColor1
-                              : Color(0xFFE4E4E4)),
-                      children: [
-                        TextSpan(
-                          text: NumberFormat.currency(
-                              locale: "id_ID", symbol: "Rp", decimalDigits: 2)
-                              .format(selectedAmount),
-                          style: whiteNumberFont.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: (selectedAmount >= 10000)
-                                  ? accentColor1
-                                  : Color(0xFFE4E4E4)),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  FaIcon(FontAwesomeIcons.cartPlus,
-                      size: 20,
+      builder: (_, userState) => Container(
+        margin: EdgeInsets.only(bottom: 30),
+        height: 45,
+        width: MediaQuery.of(context).size.width - 2 * defaultMargin,
+        child: RaisedButton(
+          onPressed: (selectedAmount >= 10000)
+              ? () {
+                  showAlertDialog(context, userState);
+                }
+              : null,
+          color: accentColor2,
+          disabledColor: accentColor3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Row(
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: "Top Up: ",
+                  style: whiteNumberFont.copyWith(
+                      fontWeight: FontWeight.w300,
                       color: (selectedAmount >= 10000)
                           ? accentColor1
                           : Color(0xFFE4E4E4)),
-                ],
+                  children: [
+                    TextSpan(
+                      text: NumberFormat.currency(
+                              locale: "id_ID", symbol: "Rp", decimalDigits: 2)
+                          .format(selectedAmount),
+                      style: whiteNumberFont.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: (selectedAmount >= 10000)
+                              ? accentColor1
+                              : Color(0xFFE4E4E4)),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Spacer(),
+              FaIcon(FontAwesomeIcons.cartPlus,
+                  size: 20,
+                  color: (selectedAmount >= 10000)
+                      ? accentColor1
+                      : Color(0xFFE4E4E4)),
+            ],
           ),
+        ),
+      ),
     );
   }
 
   void showAlertDialog(BuildContext context, userState) {
-    Widget cancelButton = FlatButton(
-      child: Text("Cancel", style: purpleTextFont.copyWith(fontWeight: FontWeight.w300)),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
+    String amount =
+        NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp")
+            .format(selectedAmount);
 
-    Widget continueButton = FlatButton(
-        child: Text("Top Up", style: purpleTextFont.copyWith(fontWeight: FontWeight.w600)),
-        onPressed: () {
-          Navigator.of(context).pop();
-          var now = DateTime.now();
-          var user = (userState as UserLoaded).user;
-          context.bloc<PageBloc>().add(GoToSuccessPage(
-              null,
-              AppTransaction(
-                userId: user.id,
-                title: "Top Up Wallet",
-                amount: selectedAmount,
-                subtitle:
-                "${now.fullDayName}, ${now.day} ${now.monthName} ${now.year}",
-                time: now,
-              )));
-        });
-
-    String amount = NumberFormat.currency(
-        locale: "id_ID",
-        decimalDigits: 0,
-        symbol: "Rp"
-    ).format(selectedAmount);
-
-    AlertDialog alert = AlertDialog(
-      title: Text("Confirmation Top Up", style: blackTextFont.copyWith(color: accentColor1, fontSize: 18)),
-      content: Text("Would you like to top up your wallet $amount", style: greyTextFont.copyWith(fontSize: 14)),
-      actions: [
-        cancelButton,
-        continueButton
+    Alert(
+      context: context,
+      title: "Confirmation",
+      type: AlertType.warning,
+      desc: "Would you like to top up your wallet $amount ?",
+      buttons: [
+        DialogButton(
+          color: Colors.grey[300],
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text("Cancel",
+              style: blackTextFont.copyWith(fontWeight: FontWeight.bold)),
+        ),
+        DialogButton(
+          color: Colors.green,
+          onPressed: () {
+            Navigator.of(context).pop();
+            var now = DateTime.now();
+            var user = (userState as UserLoaded).user;
+            context.bloc<PageBloc>().add(GoToSuccessPage(
+                null,
+                AppTransaction(
+                  userId: user.id,
+                  title: "Top Up Wallet",
+                  amount: selectedAmount,
+                  subtitle:
+                      "${now.fullDayName}, ${now.day} ${now.monthName} ${now.year}",
+                  time: now,
+                )));
+          },
+          child: Text("Top Up",
+              style: blackTextFont.copyWith(fontWeight: FontWeight.bold)),
+        ),
       ],
-    );
-
-    showDialog<void>(
-        context: context,
-        builder: (context) => alert
-    );
+      style: AlertStyle(
+        titleStyle: blackTextFont.copyWith(fontWeight: FontWeight.bold),
+        descStyle: blackTextFont.copyWith(fontSize: 14),
+        animationType: AnimationType.fromBottom,
+      ),
+    ).show();
   }
 
-  Widget makeAmountCard({int amount, double width}) =>
-      AmountCard(
+  Widget makeAmountCard({int amount, double width}) => AmountCard(
         amount: amount,
         width: width,
         isSelected: selectedAmount == amount,
@@ -228,7 +221,7 @@ class _TopUpPageState extends State<TopUpPage> {
               selectedAmount = 0;
             }
             amountController.text = NumberFormat.currency(
-                locale: "id_ID", decimalDigits: 0, symbol: "")
+                    locale: "id_ID", decimalDigits: 0, symbol: "")
                 .format(selectedAmount);
           });
         },
