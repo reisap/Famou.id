@@ -23,10 +23,9 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: Text("Confirm\nNew Account",
+            title: Text("Confirm New Account",
                 textAlign: TextAlign.center,
-                style: blackTextFont.copyWith(
-                    fontSize: 20, fontWeight: FontWeight.w600)),
+                style: blackTextFont.copyWith(fontWeight: FontWeight.w600)),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -36,8 +35,6 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                     .add(GoToPreferencePage(widget.registrationData));
               },
             ),
-            toolbarHeight: 76,
-            elevation: 0,
           ),
           body: Container(
             color: Colors.white,

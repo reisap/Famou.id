@@ -44,8 +44,8 @@ class _PreferencePageState extends State<PreferencePage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          title: Text("Favorite Genres & Region", style: blackTextFont),
+          title: Text("Favorite Genres & Region",
+              style: blackTextFont.copyWith(fontWeight: FontWeight.w600)),
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -73,7 +73,6 @@ class _PreferencePageState extends State<PreferencePage> {
                 : SizedBox()
           ],
           backgroundColor: Colors.white,
-          toolbarHeight: 76,
         ),
         body: Container(
           color: Colors.white,
@@ -85,10 +84,13 @@ class _PreferencePageState extends State<PreferencePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text("Select Your\nFavorite Genre",
-                      style: blackTextFont.copyWith(
-                          fontSize: 16, fontWeight: FontWeight.w600)),
-                  Text("(Select min. 4 Genres,\nmax. 8 Genres)",
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Text("Select Your\nFavorite Genre",
+                        style: blackTextFont.copyWith(
+                            fontSize: 16, fontWeight: FontWeight.w600)),
+                  ),
+                  Text("(Select min. 4 Genres)",
                       textAlign: TextAlign.end,
                       style: greyTextFont.copyWith(
                           fontSize: 12, fontWeight: FontWeight.w600)),
@@ -159,11 +161,9 @@ class _PreferencePageState extends State<PreferencePage> {
         selectedGenres.remove(genre);
       });
     } else {
-      if (selectedGenres.length < 8) {
-        setState(() {
-          selectedGenres.add(genre);
-        });
-      }
+      setState(() {
+        selectedGenres.add(genre);
+      });
     }
   }
 }

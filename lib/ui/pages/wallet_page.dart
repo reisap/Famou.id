@@ -29,10 +29,12 @@ class WalletPage extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("My Wallet", style: blackTextFont),
+          title: Text(
+            "My Wallet",
+            style: blackTextFont.copyWith(fontWeight: FontWeight.w600),
+          ),
           centerTitle: true,
           backgroundColor: Colors.white,
-          elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () {
@@ -85,7 +87,7 @@ class WalletPage extends StatelessWidget {
   Container _buildUserCard(User user) {
     return Container(
       height: 185,
-      margin: EdgeInsets.symmetric(horizontal: defaultMargin, vertical: 10),
+      margin: EdgeInsets.fromLTRB(defaultMargin, 20, defaultMargin, 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(

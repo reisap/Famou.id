@@ -32,8 +32,10 @@ class _TopUpPageState extends State<TopUpPage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 0,
-          title: Text("Top Up Balance", style: blackTextFont),
+          title: Text(
+            "Top Up Balance",
+            style: blackTextFont.copyWith(fontWeight: FontWeight.w600),
+          ),
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -51,28 +53,31 @@ class _TopUpPageState extends State<TopUpPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          if (value == "")
-                            selectedAmount = 0;
-                          else
-                            selectedAmount =
-                                int.parse(value.replaceAll(".", "")) ?? 0;
-                        });
-                      },
-                      style: whiteNumberFont.copyWith(color: Colors.black),
-                      controller: amountController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          helperText: "Min. top up Rp10.000",
-                          helperStyle: blackTextFont,
-                          labelText: "Amount",
-                          prefixText: "Rp ",
-                          prefixStyle: blackTextFont),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            if (value == "")
+                              selectedAmount = 0;
+                            else
+                              selectedAmount =
+                                  int.parse(value.replaceAll(".", "")) ?? 0;
+                          });
+                        },
+                        style: whiteNumberFont.copyWith(color: Colors.black),
+                        controller: amountController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            helperText: "Min. top up Rp10.000",
+                            helperStyle: blackTextFont,
+                            labelText: "Amount",
+                            prefixText: "Rp ",
+                            prefixStyle: blackTextFont),
+                      ),
                     ),
                     SizedBox(height: 20),
                     Text("Choose your own",

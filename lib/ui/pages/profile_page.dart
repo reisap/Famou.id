@@ -36,10 +36,12 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Edit Profile", style: blackTextFont),
+          title: Text(
+            "Edit Profile",
+            style: blackTextFont.copyWith(fontWeight: FontWeight.w600),
+          ),
           centerTitle: true,
           backgroundColor: Colors.white,
-          elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () {

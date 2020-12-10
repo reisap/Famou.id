@@ -31,23 +31,20 @@ class _SignUpPageState extends State<SignUpPage> {
         .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor1)));
     return WillPopScope(
       onWillPop: () async {
-        context.bloc<PageBloc>().add(GoToSplashPage());
+        context.bloc<PageBloc>().add(GoToLoginPage());
         return;
       },
       child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: Text("Create Your New\nAccount",
+            title: Text("Create New Account",
                 textAlign: TextAlign.center,
-                style: blackTextFont.copyWith(
-                    fontSize: 20, fontWeight: FontWeight.w600)),
+                style: blackTextFont.copyWith(fontWeight: FontWeight.w600)),
             centerTitle: true,
-            toolbarHeight: 76,
-            elevation: 0,
             leading: IconButton(
                 icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () {
-                  context.bloc<PageBloc>().add(GoToSplashPage());
+                  context.bloc<PageBloc>().add(GoToLoginPage());
                 }),
           ),
           body: Container(
@@ -62,6 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Container(
                       width: 90,
                       height: 104,
+                      margin: EdgeInsetsDirectional.only(top: 20),
                       child: Stack(
                         children: [
                           //* Profile Picture

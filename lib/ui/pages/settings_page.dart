@@ -11,7 +11,6 @@ class SettingsPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 0,
           centerTitle: true,
           title: Image.asset("assets/h_logo.png", height: 30),
           leading: IconButton(
@@ -80,27 +79,32 @@ class SettingsPage extends StatelessWidget {
                       }),
                       SizedBox(height: 10),
                       SettingsMenu(FontAwesomeIcons.wallet, "My Wallet", () {
-                        context.bloc<PageBloc>().add(GoToWalletPage(GoToSettingsPage()));
+                        context
+                            .bloc<PageBloc>()
+                            .add(GoToWalletPage(GoToSettingsPage()));
                       }),
                       SizedBox(height: 10),
-                      SettingsMenu(FontAwesomeIcons.laptopCode, "About Developer", () {}),
+                      SettingsMenu(FontAwesomeIcons.laptopCode,
+                          "About Developer", () {}),
                       SizedBox(height: 10),
-                      SettingsMenu(FontAwesomeIcons.infoCircle, "About Apps", () {}),
+                      SettingsMenu(
+                          FontAwesomeIcons.infoCircle, "About Apps", () {}),
                       SizedBox(height: 10),
                       SettingsMenu(FontAwesomeIcons.signOutAlt, "Sign Out", () {
                         context.bloc<UserBloc>().add(SignOut());
                         AuthService.signOut();
                       }),
                       SizedBox(height: 20),
-                      Text("Famou.ID", style: greyTextFont.copyWith(
-                          fontSize: 14, fontWeight: FontWeight.bold),),
+                      Text(
+                        "Famou.ID",
+                        style: greyTextFont.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(height: 8),
                       Text(
-                        "\u00A9 Ian Ahmad Fachriza, ${DateTime
-                            .now()
-                            .year}",
-                        style: greyTextFont.copyWith(fontSize: 12,
-                            fontWeight: FontWeight.w300),
+                        "\u00A9 Ian Ahmad Fachriza, ${DateTime.now().year}",
+                        style: greyTextFont.copyWith(
+                            fontSize: 12, fontWeight: FontWeight.w300),
                       ),
                       SizedBox(height: 50),
                     ],

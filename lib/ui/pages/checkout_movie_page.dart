@@ -25,10 +25,9 @@ class _CheckoutMoviePageState extends State<CheckoutMoviePage> {
         appBar: AppBar(
           title: Text(
             "Checkout Movie",
-            style: blackTextFont.copyWith(fontSize: 20),
+            style: blackTextFont.copyWith(fontWeight: FontWeight.w600),
           ),
           centerTitle: true,
-          elevation: 0,
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: Icon(

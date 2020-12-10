@@ -37,7 +37,6 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () {
@@ -165,7 +164,10 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        titleText("Choose Date", FontAwesomeIcons.calendarDay),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: titleText("Choose Date", FontAwesomeIcons.calendarDay),
+        ),
         SizedBox(
           height: 90,
           child: ListView.builder(

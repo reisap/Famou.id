@@ -16,3 +16,4 @@ part 'date_card.dart';
 part 'amount_card.dart';
 part 'history_transaction.dart';
 part 'list_genre.dart';
+part 'show_image.dart';
