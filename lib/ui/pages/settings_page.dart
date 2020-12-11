@@ -194,7 +194,7 @@ class SettingsPage extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Famou.ID is a cinema ticket booking simulation application, created using the Flutter framework with the Dart programming language.\n\nYou can search for now playing movies, upcoming movies, movies by genre and region that you like and you can simulate ticket bookings.\n",
+            "Famou.ID is a cinema ticket booking simulation application, created using the Flutter framework with the Dart programming language. This application consume Movies API from https://themoviedb.org\n\nYou can search for now playing movies, upcoming movies, movies by genre and region that you like and you can simulate ticket bookings.\n",
             textAlign: TextAlign.justify,
             style: blackTextFont.copyWith(fontSize: 12),
           ),

@@ -7,17 +7,17 @@ Color accentColor1 = Color(0xFF0F004F);
 Color accentColor2 = Color(0xFFFBD460);
 Color accentColor3 = Color(0xFFADADAD);
 
-TextStyle blackTextFont = GoogleFonts.raleway()
+TextStyle blackTextFont = GoogleFonts.quicksand()
     .copyWith(color: Colors.black, fontWeight: FontWeight.w500);
-TextStyle whiteTextFont = GoogleFonts.raleway()
+TextStyle whiteTextFont = GoogleFonts.quicksand()
     .copyWith(color: Colors.white, fontWeight: FontWeight.w500);
-TextStyle purpleTextFont = GoogleFonts.raleway()
+TextStyle purpleTextFont = GoogleFonts.quicksand()
     .copyWith(color: mainColor, fontWeight: FontWeight.w500);
-TextStyle greyTextFont = GoogleFonts.raleway()
+TextStyle greyTextFont = GoogleFonts.quicksand()
     .copyWith(color: accentColor3, fontWeight: FontWeight.w500);
 
 TextStyle whiteNumberFont =
-    GoogleFonts.openSans().copyWith(color: Colors.white);
+    GoogleFonts.quicksand().copyWith(color: Colors.white);
 TextStyle greyNumberFont = GoogleFonts.openSans().copyWith(color: accentColor3);
 TextStyle yellowNumberFont =
-    GoogleFonts.openSans().copyWith(color: accentColor2);
+    GoogleFonts.quicksand().copyWith(color: accentColor2);
