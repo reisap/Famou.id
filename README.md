@@ -2,7 +2,7 @@
 
 A new Flutter application.
 
-!(https://raw.githubusercontent.com/ianahmfac/images/master/Banner.png)
+![img](https://raw.githubusercontent.com/ianahmfac/images/master/Banner.png)
 
 ## Getting Started
 
