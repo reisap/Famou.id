@@ -1,6 +1,8 @@
 # Famou.id
 
-A new Flutter application.
+Famou.ID is a cinema ticket booking simulation application, created using the Flutter framework with the Dart programming language. This application consumes Movies API from https://themoviedb.org and using Firebase Authentication for user authentication + Firestore for storing transactions, tickets, and users data.
+
+You can search for now playing movies, upcoming movies, movies by genre and region that you like and you can simulate ticket bookings
 
 ![img](https://raw.githubusercontent.com/ianahmfac/images/master/Banner.png)
 
